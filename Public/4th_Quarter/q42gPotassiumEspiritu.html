@@ -30,7 +30,9 @@
                 margin: 0 auto;
                 border: solid white 1px;
                 padding: 30px;
-                width: 600px
+                width: 600px;
+                border-radius: 5px;
+
             }
 
             label{
@@ -50,6 +52,11 @@
             .starWrap{
                 width: 50px;
                 position: relative;
+            }
+
+            input, .genreSel, option, button{
+                border: none;
+                border-radius: 5px;
             }
 
             .fill{
@@ -210,6 +217,7 @@
                 const thing = document.createElement("div");
 
                 thing.style.border = "1px solid white";
+                thing.style.borderRadius = "5px";
                 thing.style.padding = "10px";
                 thing.style.paddingLeft = "20px";
                 thing.style.color = "white";
