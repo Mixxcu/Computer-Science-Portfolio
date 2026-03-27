@@ -118,11 +118,17 @@ It appears at the top of content because of position absolute and because of top
 
         - Static: Default position of an element
         - Relative: Relative to its default position 
-        - Absolute:
-        - Fixed: 
+        - Absolute: relative to nearest ancestor
+        - Fixed: in a fixed position based on viewport
 
     b. How does absolute positioning depend on its parent element?
 
+        It places it based on its parent's positioning first and then is positioned.
+
     c. How do you differentiate sticky from fixed (you can research on sticky)?
 
+        Fixed makes it fixed in a certain position based on the viewport while sticky can change between relative and fixed depending on how far you scroll like in a sticky nav bar.
+
     d. If you were designing a webpage for a school event, how might you use positioning to highlight important information? Please give concrete examples.
+
+        I would use z-index by positioning more information above others and use relative when i want to highlight anothe rpiece of info inside another.
