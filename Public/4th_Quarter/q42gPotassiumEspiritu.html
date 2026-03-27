@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name ="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" href="../2nd Quarter/assets/work.jpg">
+        <meta name="author" content="Espiritu, Antoinette Francesca M."> 
+        <title> Movie Rating</title>
+    </head>
+    <body>
+        <style>
+            body{
+                background-color:rgb(11, 10, 10);
+                margin-bottom: 50px;
+            }
+
+            h1, h2{
+                font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+                text-align: center;
+                margin-top: 50px;
+                color: white;
+            }
+
+            .box{
+                margin-top: 50px;
+                justify-content: center;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                margin: 0 auto;
+                border: solid white 1px;
+                padding: 30px;
+                width: 600px;
+                border-radius: 5px;
+
+            }
+
+            label{
+                color: white;
+            }
+
+            .stars {
+                font-size: 50px;
+                cursor: pointer;
+            }
+
+            .star {
+                color: rgb(74, 72, 72);
+                transition: color 0.5s ease;
+            }
+
+            .starWrap{
+                width: 50px;
+                position: relative;
+            }
+
+            input, .genreSel, option, button{
+                border: none;
+                border-radius: 5px;
+            }
+
+            .fill{
+                color: rgb(225, 196, 99);
+            }
+
+            .buttons{
+                display: flex;
+                gap: 10px;
+            }
+
+            .genreSel, input, button{
+                width: 180px;
+                height: 20px;
+                background-color: rgb(225, 196, 99);
+            }
+
+        </style>
+        <h1>Movie List Tracker</h1>
+        <form class="box">
+            <label for="title">Title:</label>
+            <input type="text" id="titleT" required> <br>
+            <label for="year">Year:</label> 
+            <input type="text" id="yearT" required> <br>
+            <label for ="genre">Genre:</label>
+                <select class="genreSel">
+                    <option value="Action">Action</option>
+                    <option value="Drama">Drama</option>
+                    <option value="Comedy">Comedy</option>
+                    <option value="Horror">Horror</option>
+                    <option value="Romance">Romance</option>
+                    <option value="Sci-Fi">Sci-Fi</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Mystery">Mystery</option>
+                    <option value="Adventure">Adventure</option>
+                    <option value="Fantasy">Fantasy</option>
+                </select> <br> 
+            <label for="starRating">Rating:</label>
+            <div class="stars">
+                <span class="starWrap"><span class="star">★</span></span>
+                <span class="starWrap"><span class="star">★</span></span>
+                <span class="starWrap"><span class="star">★</span></span>
+                <span class="starWrap"><span class="star">★</span></span>
+                <span class="starWrap"><span class="star">★</span></span>
+            </div> <br>
+            <div class = "buttons">
+                <button type="➲ Submit" value="Submit">Add</button> <br>
+                <button type="⟳ Reset" value="Reset">Reset</button><br>
+                <button id="✖︎ Clear">Clear List</button>
+            </div>
+        </form>
+        <br>
+        <div id="movList">
+        </div>
+    </body>
+    <script>
+
+        const form = document.querySelector(".box");
+        const titleIn = document.querySelector("#titleT");
+        const yearIn = document.querySelector("#yearT");
+        const genreIn = document.querySelector(".genreSel");
+        const stars = document.querySelectorAll(".starWrap");
+        const movList = document.querySelector("#movList");
+        const reset = document.querySelector("button[type='reset']");
+        const clear = document.querySelector("#clear");
+
+        let selectedRating = 0;
+
+        stars.forEach((starWrap, index) => {
+
+            starWrap.addEventListener("mousemove", function(e) {
+                const rect = starWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+
+                let value = index + 1;
+                if (x < rect.width / 2) value -= 0.5;
+
+                highlightStars(value);
+            });
+
+            starWrap.addEventListener("click", function(e){
+                const rect = starWrap.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+
+                selectedRating = index + 1;
+                if (x < rect.width / 2) selectedRating -= 0.5;
+
+                highlightStars(selectedRating);
+            });
+
+            starWrap.addEventListener("mouseleave", function(){
+                highlightStars(selectedRating);
+            });
+
+        });
+
+        function highlightStars(rating) {
+            stars.forEach( function(starWrap, i) {
+                const star = starWrap.querySelector(".star");
+
+                if (rating >= i + 1) {
+                    star.style.color = "rgb(225,196,99)";
+                    star.style.background = "none";
+                    star.style.webkitTextFillColor = "";
+                    star.style.webkitBackgroundClip ="";
+                }
+                else if (rating >= i + 0.5) {
+                    star.classList.add("fill");
+                    star.style.background = "linear-gradient(to right, rgb(225,196,99) 50%, rgb(74,72,72) 50%)";
+                    star.style.webkitBackgroundClip = "text";
+                    star.style.webkitTextFillColor = "transparent";
+                }
+                else {
+                    star.style.background = "none";
+                    star.style.webkitBackgroundClip = "";
+                    star.style.webkitTextFillColor = "";
+                    star.style.color = "rgb(74,72,72)";
+                }
+            });
+        }
+
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            
+            const film = {
+                title: titleIn.value,
+                year: yearIn.value,
+                genre: genreIn.value,
+                rating: selectedRating
+            };
+            
+            let films = JSON.parse(localStorage.getItem("films")) || [];
+
+            let filmHere = films.find(f => f.title.toLowerCase() === film.title.toLowerCase());
+
+            if(filmHere){
+                filmHere.year = film.year;
+                filmHere.genre = film.genre;
+                filmHere.rating = (filmHere.rating + film.rating) / 2;} 
+                else {
+                films.push(film);
+             }
+
+            localStorage.setItem("films", JSON.stringify(films));
+
+            form.reset();
+            selectedRating = 0;
+            highlightStars(0);
+            
+            displayList();
+            });
+
+            function displayList(){
+            let films = JSON.parse(localStorage.getItem("films")) || [];
+            movList.innerHTML = "";
+
+            films.forEach(function(filmHere, index){
+                const thing = document.createElement("div");
+
+                thing.style.border = "1px solid white";
+                thing.style.borderRadius = "5px";
+                thing.style.padding = "10px";
+                thing.style.paddingLeft = "20px";
+                thing.style.color = "white";
+                thing.style.width = "640px";
+                thing.style.margin = "0 auto";
+                thing.style.marginTop = "10px";
+                thing.style.textAlign = "left";
+
+                thing.innerHTML = `${filmHere.title} (${filmHere.year}) - ${filmHere.genre},
+                Rating: ${stary(filmHere.rating)} (${filmHere.rating.valueOf().toFixed(1)})
+                <button class="bye" style="float: right;">Remove</button>`;
+                
+                const bye = thing.querySelector(".bye");
+
+                bye.addEventListener("click", function() {
+                    if(confirm(`Are you sure you want to delete ${filmHere.title} from the list?`)){
+                    films.splice(index, 1);
+                    localStorage.setItem("films", JSON.stringify(films));
+                    displayList();
+                    }
+                });
+                movList.appendChild(thing);
+            });
+        }
+
+        function stary(rating){
+            let stars = "";
+            for(let i = 0; i < 5; i++){
+                if (rating >= i + 1){
+                    stars += "★";
+                }
+                else if (rating >= i + 0.5){
+                    stars += "⯪";
+                }
+                else {
+                    stars += "☆";
+                }
+            }
+            return stars;
+        }
+
+        displayList();
+
+        reset.addEventListener("click", function() {
+            selectedRating = 0;
+            highlightStars(0);
+        });
+
+        clear.addEventListener("click", function() {
+            if(confirm("Are you sure you want to clear the list? This action cannot be undone.")){
+            localStorage.removeItem("films");
+            displayList();
+            }
+        });
+
+        displayList();
+    </script>
+</html>
