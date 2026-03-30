@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <meta name="author" content="Espiritu, Antoinette Francesca M.">
+  <meta name="description" content="testing and debugging">
+  <meta name="keywords" content="testing and debugging">
+  <title>Espiritu K11 | Graded 3</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins:wght@300&family=Roboto&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+
+  <style>
+    tr:nth-child(1) ~ tr:nth-child(odd) {
+      background-color: lightgray;
+      color: black;
+    }
+    td, th {
+      padding: 10px;
+    }
+    table {
+      width: 90%;
+      margin: 0 auto;
+    }
+    caption {
+      font-size: 2em;
+      font-weight: bold;
+      padding: 10px;
+    }
+    
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html#start">Table</a>
+      <a href="index.html#input">Input</a>
+      <a href="index.html#output">Output</a>
+    </nav>
+    
+    <h1 style="padding: 30px">Espiritu / Potassium Mar 30 2026 </h1>
+  </header>
+
+  <section id="table">
+    <table> 
+      <caption> Error Logs - place errors found in the table below</caption>
+      <tr class="rColor">
+        <th> item# </th> 
+        <th> code line#<br/>CSS or JS </th> 
+        <th> Description</th>
+        <th> Correction Done</th>
+      </tr>
+      <tr>
+        <td> 1 </td> 
+        <td> code line#28 <br/>CSS</td> 
+        <td>Missing CSS for nav bar formatting</td>
+        <td> "position: sticky;
+             display: flex;"
+        </td>
+      </tr>
+      <tr>
+        <td> 2 </td> 
+        <td> code line#40 </br>CSS</td> 
+        <td> Space between a and :hover</td>
+        <td> "nav a:hover {...}"</td>
+      </tr>
+      <tr>
+        <td> 3 </td> 
+        <td> code line#94 </br>CSS</td> 
+        <td> Missing syntax in css</td>
+        <td> "background: url('images/sprites.png') no-repeat;"</td>
+      </tr>
+      <tr>
+        <td> 4 </td> 
+        <td> code line#57 </br>CSS</td> 
+        <td> Missing syntax in css</td>
+        <td> "position: absolute;"</td>
+      </tr>
+      <tr>
+        <td> 5 </td> 
+        <td> code line#7 & #8 </br>JS</td> 
+        <td> Incorrect syntax </td>
+        <td> "point.style.left = (x - x0 + 200 - 5) + 'px';
+    point.style.top = (y - y0 + 200 - 5) + 'px':"</td>
+      </tr>
+      <tr>
+        <td> 6 </td> 
+        <td> code line#2 </br>JS</td> 
+        <td> Missing declaration</td>
+        <td>
+            " var x0 = 0;
+            var y0 = 0;
+            var x = 7;
+            var y = 8;
+            var in1 = document.getElementById("in1");
+            var out1 = document.getElementById("out1");"
+        </td>
+      </tr>
+      <tr>
+        <td> 7 </td> 
+        <td> code line#121 </br>HTML</td> 
+        <td> Missing Code</td>
+        <td> 
+        "<div id="coordinatePlane">
+        <div id="xAxis" class="axis"></div>
+        <div id="yAxis" class="axis"></div>
+        </div>
+        <p id="in1"></p>
+        <p id="out1"></p>"
+        </td>
+      </tr>
+      <tr>
+        <td> 8 </td> 
+        <td> code line#31</td> 
+        <td> No function calling</td>
+        <td> "plotPoint()"</td>
+      </tr>
+      <tr>
+        <td> 9 </td> 
+        <td> code line#140 </br>HTML</td> 
+        <td>Not linking js file</td>
+        <td>"<script src="script.js"></script>"</td>
+      </tr>
+      <tr>
+        <td> 10 </td> 
+        <td> code line#14 </br>JS</td> 
+        <td> incorrect code</td>
+        <td>"point.style.top = (200 - (y - y0) - 5) + 'px';"</td>
+      </tr>
+     
+    </table>
+    <hr>
+  </section>
+  
+   
+  <!--- anchors for socmed site are done with image sprites -->
+  <footer>
+    <a href="https://facebook.com"> 
+    <div class="icon facebook"></div>
+    </a>
+    <a href="https://twitter.com">
+    <div class="icon twitter"></div>
+    </a>
+    <a href="https://github.com">
+    <div class="icon github"></div>
+    </a>
+  </footer>
+ 
+</body>
+
+</html>
